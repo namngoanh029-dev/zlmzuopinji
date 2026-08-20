@@ -52,8 +52,8 @@ a:focus-visible {
   align-items: start;
   gap: 24px;
   padding: 28px;
-  background: var(--stage);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ink);
 }
 
 .hero-copy {
@@ -74,7 +74,7 @@ a:focus-visible {
 }
 
 .eyebrow {
-  color: var(--acid);
+  color: var(--red-deep);
 }
 
 /* Paper-surface labels use ink or deep vermilion for readable contrast. */
@@ -95,7 +95,7 @@ a:focus-visible {
 .hero-statement {
   max-width: 20rem;
   margin: 28px 0 18px;
-  color: var(--paper);
+  color: var(--ink);
   font-size: 2rem;
   line-height: 1.25;
 }
@@ -103,14 +103,14 @@ a:focus-visible {
 .hero-meta {
   max-width: 26rem;
   margin: 0 0 24px;
-  color: #c7cec3;
+  color: var(--muted);
   font-size: 0.95rem;
 }
 
 .text-link {
   display: inline-block;
-  border-bottom: 1px solid var(--acid);
-  color: var(--acid);
+  border-bottom: 1px solid var(--red);
+  color: var(--red-deep);
   padding-bottom: 3px;
   text-decoration: none;
 }
@@ -120,8 +120,8 @@ a:focus-visible {
   height: calc(100svh - 56px);
   min-height: 680px;
   overflow: hidden;
-  border: 1px solid var(--white-line);
-  background: var(--stage-soft);
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
   cursor: grab;
 }
 
@@ -327,14 +327,14 @@ a:focus-visible {
   position: absolute;
   z-index: 2;
   margin: 0;
-  color: #d5ddd0;
+  color: var(--muted);
   font-size: 0.75rem;
 }
 
 .scene-status {
   top: 12px;
   left: 14px;
-  border-bottom: 1px solid var(--acid);
+  border-bottom: 1px solid var(--red);
   padding-bottom: 2px;
 }
 
@@ -348,7 +348,7 @@ a:focus-visible {
   min-height: 360px;
   max-height: calc(100svh - 56px);
   overflow: auto;
-  background: var(--paper);
+  background: var(--paper-deep);
   color: var(--ink);
   padding: 24px;
   opacity: 1;
@@ -1134,7 +1134,7 @@ a:focus-visible {
 
   .hero-copy .eyebrow {
     margin: 0;
-    color: var(--paper);
+    color: var(--red-deep);
     font-size: 0.78rem;
     letter-spacing: 0.04em;
     text-transform: none;
@@ -1161,7 +1161,7 @@ a:focus-visible {
     height: calc(100svh - 56px);
     min-height: 680px;
     border: 0;
-    background: var(--stage);
+    background: var(--paper-deep);
   }
 
   .case-panel {

@@ -43,6 +43,24 @@ test("avatar anchors use the avatar world transform and publish every frame", ()
   assert.doesNotMatch(projection, /querySelector|style\./);
 });
 
+test("avatar scene uses a paper studio set with a soft spotlight and shadows", () => {
+  assert.match(scene, /createStudioSet/);
+  assert.match(scene, /new THREE\.SpotLight\(0xfff4df/);
+  assert.match(scene, /renderer\.shadowMap\.enabled = true/);
+  assert.match(scene, /THREE\.PCFSoftShadowMap/);
+  assert.match(scene, /castShadow = true/);
+  assert.match(scene, /receiveShadow = true/);
+  assert.match(scene, /PlaneGeometry\(16, 12\)/);
+  assert.match(scene, /PlaneGeometry\(16, 8\)/);
+});
+
+test("white studio scene keeps the hero and scene shell on the paper palette", () => {
+  assert.match(css, /\.hero\s*{[\s\S]*background:\s*var\(--paper\)/);
+  assert.match(css, /\.scene-shell\s*{[\s\S]*background:\s*var\(--paper-deep\)/);
+  assert.match(css, /\.hero\s*{[\s\S]*color:\s*var\(--ink\)/);
+  assert.match(css, /\.scene-status[\s\S]*color:\s*var\(--muted\)/);
+});
+
 test("DOM content renders before the optional scene import", () => {
   assert.match(main, /from "\.\/hotspot-view\.js"/);
   assert.match(main, /renderHotspots/);

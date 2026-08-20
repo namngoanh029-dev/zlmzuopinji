@@ -54,20 +54,33 @@ export function createAvatarScene({
   camera.position.set(0, 0.45, 7);
   camera.lookAt(0, 0.2, 0);
 
+  const studioSet = createStudioSet();
+  scene.add(studioSet);
+
   const avatar = new THREE.Group();
   scene.add(avatar);
   const fallback = makeFallbackAvatar();
+  configureMeshShadows(fallback);
   avatar.add(fallback);
   const markerView = createCapabilityMarkers(anchors);
   avatar.add(markerView.group);
 
-  scene.add(new THREE.HemisphereLight(0xf4f1e8, 0x1d241f, 2.2));
-  const key = new THREE.DirectionalLight(0xd8ff55, 2.4);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xb9b4aa, 1.7));
+  const key = new THREE.DirectionalLight(0xfff4df, 1.5);
   key.position.set(3, 4, 5);
   scene.add(key);
-  const fill = new THREE.DirectionalLight(0xb9c5ff, 1.1);
+  const fill = new THREE.DirectionalLight(0xd9e5ff, 1.15);
   fill.position.set(-4, 2, 3);
   scene.add(fill);
+  const spotlight = new THREE.SpotLight(0xfff4df, 32, 18, Math.PI / 5, 0.55, 1.4);
+  spotlight.position.set(-2.4, 5.2, 4.5);
+  spotlight.castShadow = true;
+  spotlight.shadow.mapSize.set(1024, 1024);
+  spotlight.shadow.camera.near = 0.5;
+  spotlight.shadow.camera.far = 18;
+  spotlight.shadow.bias = -0.0001;
+  spotlight.target.position.set(0, 0.3, 0);
+  scene.add(spotlight, spotlight.target);
 
   const wrapper = canvas?.parentElement ?? null;
   const poster = wrapper?.querySelector?.("#avatar-poster");
@@ -102,6 +115,10 @@ export function createAvatarScene({
     renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(globalThis.window?.devicePixelRatio || 1, 2));
     renderer.setClearColor(0x000000, 0);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.08;
   } catch (error) {
     notifyFallback(error);
   }
@@ -227,6 +244,7 @@ export function createAvatarScene({
             return;
           }
           fallback.visible = false;
+          configureMeshShadows(gltf.scene);
           gltf.scene.matrixAutoUpdate = true;
           gltf.scene.matrix.identity();
           gltf.scene.position.set(0, 0, 0);
@@ -266,6 +284,7 @@ export function createAvatarScene({
     cleanupLoader?.();
     cleanupControls();
     disposeObject3D(avatar);
+    disposeObject3D(studioSet);
     renderer?.dispose?.();
   };
 
@@ -303,6 +322,39 @@ export function createAvatarScene({
     if (wrapper) wrapper.dataset.modelStatus = "fallback";
     onFallback?.();
   }
+}
+
+export function createStudioSet() {
+  const group = new THREE.Group();
+  group.name = "white-studio-set";
+
+  const backdrop = new THREE.Mesh(
+    new THREE.PlaneGeometry(16, 12),
+    new THREE.MeshStandardMaterial({ color: 0xf4f1e8, roughness: 0.92, metalness: 0 }),
+  );
+  backdrop.name = "studio-backdrop";
+  backdrop.position.set(0, 2.5, -1.8);
+  backdrop.receiveShadow = true;
+
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(16, 8),
+    new THREE.MeshStandardMaterial({ color: 0xe9e6dc, roughness: 0.92, metalness: 0 }),
+  );
+  floor.name = "studio-floor";
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.set(0, -2.25, 0);
+  floor.receiveShadow = true;
+
+  group.add(backdrop, floor);
+  return group;
+}
+
+function configureMeshShadows(root) {
+  root?.traverse?.((object) => {
+    if (!object.isMesh) return;
+    object.castShadow = true;
+    object.receiveShadow = true;
+  });
 }
 
 export function createCapabilityMarkers(items = []) {
