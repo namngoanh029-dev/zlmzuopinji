@@ -6,7 +6,7 @@ import { isAnchorFacingCamera } from "./avatar-interaction.js";
 
 const DRACO_DECODER_PATH =
   "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/libs/draco/gltf/";
-const PERSONAL_MODEL_SCALE = 3.1;
+const PERSONAL_MODEL_SCALE = 3.4;
 const DETAIL_CAMERA_SHIFT_X = 0.78;
 
 export function projectAvatarAnchors(items, avatar, camera, wrapper) {

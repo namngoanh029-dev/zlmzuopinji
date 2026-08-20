@@ -55,10 +55,30 @@ test("avatar scene uses a paper studio set with a soft spotlight and shadows", (
 });
 
 test("white studio scene keeps the hero and scene shell on the paper palette", () => {
+  const sceneShellBlock = css.match(/\.scene-shell\s*{[^}]*}/)?.[0] ?? "";
   assert.match(css, /\.hero\s*{[\s\S]*background:\s*var\(--paper\)/);
-  assert.match(css, /\.scene-shell\s*{[\s\S]*background:\s*var\(--paper-deep\)/);
+  assert.match(sceneShellBlock, /background:\s*var\(--paper\)/);
   assert.match(css, /\.hero\s*{[\s\S]*color:\s*var\(--ink\)/);
   assert.match(css, /\.scene-status[\s\S]*color:\s*var\(--muted\)/);
+});
+
+test("homepage exposes the approved personal-space welcome lockup", () => {
+  const signatureBlock = css.match(/\.hero-signature\s*{[^}]*}/)?.[0] ?? "";
+  assert.match(html, /class="hero-copy"[\s\S]*class="eyebrow">郑林茂 \/ 作品集<\/p>/);
+  assert.match(html, /class="hero-welcome">欢迎来到<\/h1>/);
+  assert.match(html, /class="hero-signature">郑林茂的个人空间<\/p>/);
+  assert.match(html, /WELCOME TO MY SPACE/);
+  assert.match(css, /\.hero-welcome[\s\S]*font-family:\s*"Songti SC"/);
+  assert.match(css, /\.hero-signature[\s\S]*font-weight:\s*700/);
+  assert.doesNotMatch(signatureBlock, /text-decoration|::after/);
+});
+
+test("homepage keeps the paper surface and large complete avatar framing", () => {
+  assert.match(css, /\.scene-shell[\s\S]*background:\s*var\(--paper\)/);
+  assert.match(css, /#avatar-poster[\s\S]*object-fit:\s*contain/);
+  assert.match(scene, /PERSONAL_MODEL_SCALE\s*=\s*3\.4/);
+  assert.match(css, /\.hero-copy[\s\S]*z-index:\s*5/);
+  assert.match(css, /\.hero\[data-detail-visible="true"\] \.hero-copy/);
 });
 
 test("DOM content renders before the optional scene import", () => {
@@ -179,7 +199,7 @@ test("mobile keeps the ability list and panel in the hero workflow", () => {
   assert.match(css, /\.case-panel\[data-visible="false"\][\s\S]+pointer-events:\s*none/);
   assert.match(main, /max-width:\s*720px/);
   assert.match(main, /panel\.scrollIntoView/);
-  assert.match(css, /@media \(max-width:\s*520px\)[\s\S]+\.scene-shell\s*{[\s\S]*height:\s*300px/);
+  assert.match(css, /@media \(max-width:\s*520px\)[\s\S]+\.scene-shell\s*{[\s\S]*height:\s*min\(118vw, 560px\)/);
 });
 
 test("mobile locked panel has an accessible dismiss control", () => {
