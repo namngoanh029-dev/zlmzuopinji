@@ -84,10 +84,11 @@ test("case stories render in research, audit, Paipai project order", () => {
   ]);
 });
 
-test("Paipai is a project context under Aihuishou, not an employer", () => {
+test("Paipai keeps a project context without exposing the internship employer in the case panel", () => {
   const refund = CASE_ITEMS.find((item) => item.id === "refund-automation");
   assert.equal(refund.label, "一键转卖自动化退费助手");
-  assert.equal(refund.companyContext, "爱回收·万物新生集团");
+  assert.equal(refund.companyContext, "业务自动化项目");
+  assert.doesNotMatch(refund.companyContext, /爱回收|万物新生集团/);
   assert.equal(refund.projectContext, "京东拍拍二手业务协同项目");
   assert.equal(refund.metrics.find((metric) => metric.label === "全自动处理率").value, "90%");
 });

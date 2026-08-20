@@ -88,7 +88,7 @@ export const PORTFOLIO_ITEMS = freeze([
     kind: "case",
     mapVisible: false,
     caseOrder: 3,
-    companyContext: "爱回收·万物新生集团",
+    companyContext: "业务自动化项目",
     projectContext: "京东拍拍二手业务协同项目",
     storyKicker: "BUSINESS PROJECT",
     summary: "针对京东拍拍退服务费流程跨 5 个系统、单均耗时 3 分钟的问题，梳理 SOP 与 PRD，搭建从订单查询、物流节点识别到退费决策的 Agent 工作流；上线后 90% 订单自动处理、10% 转人工兜底，单均时效降至 2 秒，月均节省 60 小时和 4300 元成本。",
