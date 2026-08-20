@@ -1,0 +1,56 @@
+[
+  {
+    "alt": "实际效果截图1",
+    "description": "退费自动化订单与物流信息查询结果",
+    "file": "refund-result-01.jpg",
+    "mime": "image/jpeg"
+  },
+  {
+    "alt": "实际效果截图2",
+    "description": "退费自动化单笔处理耗时结果",
+    "file": "refund-result-02.jpg",
+    "mime": "image/jpeg"
+  },
+  {
+    "alt": "实际效果截图3",
+    "description": "退费自动化完整工作流编排图",
+    "file": "refund-result-03.jpg",
+    "mime": "image/jpeg"
+  },
+  {
+    "alt": "实际效果截图4",
+    "description": "退费自动化执行后的后台流水记录",
+    "file": "refund-result-04.jpg",
+    "mime": "image/jpeg"
+  },
+  {
+    "alt": "教学案例截图",
+    "description": "退费自动化案例教学分享聊天记录",
+    "file": "teaching-case-01.png",
+    "mime": "image/png"
+  },
+  {
+    "alt": "教学案例截图2",
+    "description": "退费自动化案例教学课件全景",
+    "file": "teaching-case-02.jpg",
+    "mime": "image/jpeg"
+  },
+  {
+    "alt": "AI商品稽查工作流截图",
+    "description": "AI 商品稽查工作流节点与判断链路",
+    "file": "ai-audit-workflow.png",
+    "mime": "image/png"
+  },
+  {
+    "alt": "AI Coding 控制中台截图",
+    "description": "AI Coding Skill 使用与工作流编排控制中台界面",
+    "file": "ai-coding-control-center.png",
+    "mime": "image/png"
+  },
+  {
+    "alt": "运动健康行业产品解决方案思路图",
+    "description": "运动健康行业产品解决方案思路图",
+    "file": "sports-health-solution.png",
+    "mime": "image/png"
+  }
+]

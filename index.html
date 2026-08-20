@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="郑林茂的 AI 产品经理作品集：业务自动化、行业研究与零售热点工作流。">
+    <title>郑林茂 / AI 产品经理</title>
+    <link rel="stylesheet" href="./styles/portfolio.css?v=20260820-sports-health">
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="portfolio-main">
+      <header class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow">郑林茂 / 作品集</p>
+        </div>
+        <div class="scene-shell" data-model-url="./assets/models/zlm-avatar-q-clean.glb?v=20260817-q-avatar-clean" role="region" aria-label="可探索的个人作品集人偶">
+          <canvas id="avatar-canvas" aria-label="可拖拽旋转的个人 3D 模型，双击回到正面" title="左右拖拽旋转，双击回到正面"></canvas>
+          <img id="avatar-poster" src="./assets/models/zlm-avatar-poster.png" alt="低多边形占位人偶预览">
+          <div id="hotspot-layer" role="group" aria-label="能力热点"></div>
+          <p id="scene-status" class="scene-status">个人模型 / GLB</p>
+          <p class="scene-hint">02 INTERNSHIP SIGNALS</p>
+        </div>
+        <section id="fallback-project-list" aria-label="全部能力入口"></section>
+        <aside id="case-panel" class="case-panel" aria-live="polite" aria-atomic="true"></aside>
+      </header>
+      <section id="experience-timeline" aria-label="实习经历"></section>
+      <section id="selected-cases" aria-label="精选项目"></section>
+      <section id="working-method" aria-label="工作方法"></section>
+      <section id="case-stories" aria-label="项目案例"></section>
+      <footer class="portfolio-footer">
+        <p>OTHER WORK / PRODUCT CASE</p>
+        <a href="../../meeting-assistant/">查看会议助手产品案例</a>
+      </footer>
+    </main>
+    <script type="module" src="./js/main.js?v=20260820-sports-health"></script>
+  </body>
+</html>
