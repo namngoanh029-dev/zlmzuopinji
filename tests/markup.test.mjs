@@ -298,6 +298,9 @@ test("nested project timeline entry uses a number without the old red rail", () 
   assert.match(dom, /"project-index"/);
   const projectStyles = css.slice(css.indexOf(".experience-project {"), css.indexOf(".project-topline {"));
   assert.doesNotMatch(projectStyles, /border-left/);
+  assert.match(css, /--experience-column-gap:\s*clamp\(/);
+  assert.match(css, /\.project-index\s*{[\s\S]*right:\s*calc\(100% \+ var\(--experience-column-gap\)\)/);
+  assert.match(css, /@media \(max-width:\s*720px\)[\s\S]*\.project-index\s*{[\s\S]*position:\s*static/);
 });
 
 test("capability markers stay hidden until hover and rotation is announced accessibly", () => {
