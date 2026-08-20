@@ -191,10 +191,9 @@ export const EXPERIENCE_TIMELINE = freeze([
     id: "recommerce",
     period: "2026.01–2026.05",
     employer: "爱回收·万物新生集团",
-    role: "AI 产品实习生",
+    role: "AI 商品稽查项目",
     highlights: "20 万张商品图 · 90% 订单自动处理 · 60 小时/月节省",
     project: {
-      type: "业务协同项目",
       company: "京东拍拍二手",
       title: "一键转卖自动化退费助手",
       result: "跨 5 个系统 · 3 分钟→2 秒 · 90% 自动处理 · 4300 元/月节省",

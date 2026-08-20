@@ -65,9 +65,13 @@ test("experience timeline renders two internships and nests the Paipai project",
   assert.match(allText(entries[0]), /2026.06–至今/);
   assert.match(allText(entries[1]), /爱回收·万物新生/);
   assert.match(allText(entries[1]), /2026.01–2026.05/);
+  assert.match(allText(entries[1]), /AI 商品稽查项目/);
   assert.equal(byClass(entries[1], "experience-project").length, 1);
   assert.match(allText(entries[1]), /京东拍拍二手/);
-  assert.match(allText(entries[1]), /业务协同项目/);
+  const project = byClass(entries[1], "experience-project")[0];
+  assert.equal(byClass(project, "project-kicker").length, 0);
+  assert.equal(byClass(project, "project-index")[0].textContent, "03");
+  assert.doesNotMatch(allText(project), /业务协同项目/);
 });
 
 test("selected cases preserve research, audit, and Paipai order with a click callback", () => {

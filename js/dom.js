@@ -211,8 +211,11 @@ export function renderExperienceTimeline(container, entries = []) {
     if (entry.project) {
       const project = document.createElement("article");
       project.className = "experience-project";
-      appendTextElement(project, "p", "project-kicker", entry.project.type);
-      appendTextElement(project, "p", "project-company", entry.project.company);
+      const projectTopline = document.createElement("div");
+      projectTopline.className = "project-topline";
+      appendTextElement(projectTopline, "span", "project-index", String(list.children.length + 2).padStart(2, "0"));
+      appendTextElement(projectTopline, "p", "project-company", entry.project.company);
+      project.append(projectTopline);
       appendTextElement(project, "h4", "", entry.project.title);
       appendTextElement(project, "p", "project-result", entry.project.result);
       body.append(project);

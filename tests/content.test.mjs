@@ -19,7 +19,7 @@ test("profile preserves the recruiting identity", () => {
 test("internship timeline matches the latest resume dates and roles", () => {
   assert.deepEqual(EXPERIENCE_TIMELINE.map(({ period, employer, role }) => ({ period, employer, role })), [
     { period: "2026.06–至今", employer: "百度智能云", role: "AI 解决方案实习生" },
-    { period: "2026.01–2026.05", employer: "爱回收·万物新生集团", role: "AI 产品实习生" },
+    { period: "2026.01–2026.05", employer: "爱回收·万物新生集团", role: "AI 商品稽查项目" },
   ]);
 });
 
@@ -113,7 +113,7 @@ test("refund automation uses the latest resume metrics and impact", () => {
 test("the timeline has two formal internships and one nested project", () => {
   assert.deepEqual(EXPERIENCE_TIMELINE.map((entry) => entry.id), ["baidu", "recommerce"]);
   assert.equal(EXPERIENCE_TIMELINE[1].project.company, "京东拍拍二手");
-  assert.equal(EXPERIENCE_TIMELINE[1].project.type, "业务协同项目");
+  assert.equal("type" in EXPERIENCE_TIMELINE[1].project, false);
 });
 
 test("the audit metrics describe observed results rather than an unverified target", () => {

@@ -468,24 +468,27 @@ a:focus-visible {
 .experience-project {
   max-width: 42rem;
   margin-top: 26px;
-  border-left: 3px solid var(--red);
-  padding: 4px 0 4px 16px;
+  padding: 4px 0;
 }
 
-.project-kicker,
+.project-topline,
 .project-company,
 .project-result {
   margin: 0;
 }
 
-.project-kicker {
+.project-topline {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.project-index {
   color: var(--muted);
-  font: 0.68rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
-  text-transform: uppercase;
+  font: 0.78rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 .project-company {
-  margin-top: 4px;
   color: var(--red-deep);
   font-size: 0.85rem;
   font-weight: 700;

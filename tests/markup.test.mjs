@@ -293,6 +293,13 @@ test("capability traces use restrained editorial styling", () => {
   assert.doesNotMatch(css, /\.skill-sticker[\s\S]{0,500}box-shadow:\s*var\(--shadow\)/);
 });
 
+test("nested project timeline entry uses a number without the old red rail", () => {
+  assert.match(dom, /className = "project-topline"/);
+  assert.match(dom, /"project-index"/);
+  const projectStyles = css.slice(css.indexOf(".experience-project {"), css.indexOf(".project-topline {"));
+  assert.doesNotMatch(projectStyles, /border-left/);
+});
+
 test("capability markers stay hidden until hover and rotation is announced accessibly", () => {
   const nodeStyles = css.slice(css.indexOf(".capability-node {"), css.indexOf(".capability-node::after"));
   assert.match(nodeStyles, /opacity:\s*0;/);
