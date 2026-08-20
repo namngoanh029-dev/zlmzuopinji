@@ -91,8 +91,14 @@ test("desktop welcome copy stays in a narrow clear column beside the avatar", ()
   assert.match(css, /\.hero-copy \.hero-welcome[\s\S]*white-space:\s*nowrap/);
 });
 
+test("desktop welcome lockup keeps the muted meta copy below the vertical title", () => {
+  assert.match(html, /class="hero-lockup"[\s\S]*class="hero-welcome"[\s\S]*class="hero-signature"/);
+  assert.match(css, /\.hero-lockup\s*{[\s\S]*display:\s*flex/);
+  assert.match(css, /\.hero-copy \.hero-meta\s*{[\s\S]*display:\s*block/);
+});
+
 test("homepage busts the cached stylesheet after the clear-column fix", () => {
-  assert.match(html, /styles\/portfolio\.css\?v=20260820-unified-page-paper/);
+  assert.match(html, /styles\/portfolio\.css\?v=20260820-lockup-meta/);
 });
 
 test("resting avatar shifts right while hotspot projection follows the group", () => {
@@ -109,7 +115,7 @@ test("desktop Chinese welcome lockup uses vertical editorial typesetting", () =>
 });
 
 test("homepage refreshes the stylesheet for the vertical welcome lockup", () => {
-  assert.match(html, /styles\/portfolio\.css\?v=20260820-unified-page-paper/);
+  assert.match(html, /styles\/portfolio\.css\?v=20260820-lockup-meta/);
 });
 
 test("homepage uses one paper background without an isolated welcome panel", () => {
