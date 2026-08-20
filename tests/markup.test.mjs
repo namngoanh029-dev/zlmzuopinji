@@ -98,7 +98,7 @@ test("desktop welcome lockup keeps the muted meta copy below the vertical title"
 });
 
 test("homepage busts the cached stylesheet after the clear-column fix", () => {
-  assert.match(html, /styles\/portfolio\.css\?v=20260820-lockup-meta/);
+  assert.match(html, /styles\/portfolio\.css\?v=20260820-lockup-meta-2/);
 });
 
 test("resting avatar shifts right while hotspot projection follows the group", () => {
@@ -115,7 +115,7 @@ test("desktop Chinese welcome lockup uses vertical editorial typesetting", () =>
 });
 
 test("homepage refreshes the stylesheet for the vertical welcome lockup", () => {
-  assert.match(html, /styles\/portfolio\.css\?v=20260820-lockup-meta/);
+  assert.match(html, /styles\/portfolio\.css\?v=20260820-lockup-meta-2/);
 });
 
 test("homepage uses one paper background without an isolated welcome panel", () => {
@@ -349,8 +349,8 @@ test("long audit heading keeps a deliberate desktop line break", () => {
   assert.equal(fontSizeDeclarations.some((declaration) => /vw/.test(declaration)), false);
 });
 
-test("portfolio links to the related meeting assistant case", () => {
-  assert.match(html, /href="\.\.\/\.\.\/meeting-assistant\/"/);
+test("homepage does not expose the removed meeting assistant footer link", () => {
+  assert.doesNotMatch(html, /meeting-assistant/);
 });
 
 test("the avatar uses body targets, one SVG route, and one shared plate", () => {
