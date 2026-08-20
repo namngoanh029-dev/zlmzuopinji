@@ -7,6 +7,7 @@ import { isAnchorFacingCamera } from "./avatar-interaction.js";
 const DRACO_DECODER_PATH =
   "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/libs/draco/gltf/";
 const PERSONAL_MODEL_SCALE = 3.4;
+const DEFAULT_AVATAR_OFFSET_X = 0.86;
 const DETAIL_CAMERA_SHIFT_X = 0.78;
 
 export function projectAvatarAnchors(items, avatar, camera, wrapper) {
@@ -58,6 +59,7 @@ export function createAvatarScene({
   scene.add(studioSet);
 
   const avatar = new THREE.Group();
+  avatar.position.set(DEFAULT_AVATAR_OFFSET_X, 0, 0);
   scene.add(avatar);
   const fallback = makeFallbackAvatar();
   configureMeshShadows(fallback);
@@ -102,11 +104,18 @@ export function createAvatarScene({
   let cleanupControls = () => {};
   let controls = null;
   let focusedAnchorId = null;
-  const defaultFocusTarget = new THREE.Vector3(0, 0.2, 0);
+  const defaultFocusTarget = new THREE.Vector3(DEFAULT_AVATAR_OFFSET_X, 0.2, 0);
   const focusTargets = new Map(
     (anchors ?? [])
       .filter((item) => item?.id && Array.isArray(item.anchor))
-      .map((item) => [item.id, new THREE.Vector3(item.anchor[0] + DETAIL_CAMERA_SHIFT_X, 0.2, 0)]),
+      .map((item) => [
+        item.id,
+        new THREE.Vector3(
+          item.anchor[0] + DEFAULT_AVATAR_OFFSET_X + DETAIL_CAMERA_SHIFT_X,
+          0.2,
+          0,
+        ),
+      ]),
   );
   const focusTarget = new THREE.Vector3().copy(defaultFocusTarget);
 
@@ -155,7 +164,7 @@ export function createAvatarScene({
     if (!renderer || !canvas || !wrapper) return;
     controls = new OrbitControls(camera, wrapper);
     wrapper.style.touchAction = "none";
-    controls.target.set(0, 0.2, 0);
+    controls.target.set(DEFAULT_AVATAR_OFFSET_X, 0.2, 0);
     controls.enableDamping = !reduceMotion();
     controls.dampingFactor = 0.08;
     controls.enablePan = false;
@@ -330,7 +339,7 @@ export function createStudioSet() {
 
   const backdrop = new THREE.Mesh(
     new THREE.PlaneGeometry(16, 12),
-    new THREE.MeshStandardMaterial({ color: 0xf4f1e8, roughness: 0.92, metalness: 0 }),
+    new THREE.MeshBasicMaterial({ color: 0xf4f1e8 }),
   );
   backdrop.name = "studio-backdrop";
   backdrop.position.set(0, 2.5, -1.8);
@@ -338,7 +347,7 @@ export function createStudioSet() {
 
   const floor = new THREE.Mesh(
     new THREE.PlaneGeometry(16, 8),
-    new THREE.MeshStandardMaterial({ color: 0xe9e6dc, roughness: 0.92, metalness: 0 }),
+    new THREE.MeshBasicMaterial({ color: 0xf4f1e8 }),
   );
   floor.name = "studio-floor";
   floor.rotation.x = -Math.PI / 2;

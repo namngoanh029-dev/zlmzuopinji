@@ -418,7 +418,7 @@ a:focus-visible {
 }
 
 #selected-cases {
-  background: #e8ebe3;
+  background: var(--paper);
 }
 
 .timeline-section,
@@ -949,7 +949,7 @@ a:focus-visible {
 }
 
 .story:nth-child(even) {
-  background: #e8ebe3;
+  background: var(--paper);
 }
 
 .story-header {
@@ -1158,11 +1158,11 @@ a:focus-visible {
   .hero-copy {
     position: absolute;
     z-index: 5;
-    left: clamp(24px, 4.5vw, 68px);
-    top: clamp(28px, 10vh, 84px);
-    width: min(34vw, 380px);
+    left: clamp(18px, 2.8vw, 40px);
+    top: clamp(28px, 5vh, 48px);
+    width: min(27vw, 300px);
     max-width: none;
-    padding-top: 0;
+    padding: 10px 18px 18px 0;
     opacity: 0.86;
     pointer-events: none;
     transition: opacity 260ms ease, transform 260ms ease;
@@ -1170,6 +1170,23 @@ a:focus-visible {
 
   .hero-copy .hero-welcome {
     max-width: 14ch;
+    white-space: nowrap;
+    display: inline-block;
+    width: 4.3rem;
+    height: 13.6rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    vertical-align: top;
+  }
+
+  .hero-copy .hero-signature {
+    display: inline-block;
+    width: 2rem;
+    height: 13.6rem;
+    margin: 10px 0 0 12px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    vertical-align: top;
   }
 
   .hero-copy .eyebrow {
@@ -1344,9 +1361,20 @@ a:focus-visible {
   .hero .hero-welcome {
     max-width: 10ch;
     font-size: 3rem;
+    display: block;
+    width: auto;
+    height: auto;
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
   }
 
   .hero-signature {
+    display: block;
+    width: auto;
+    height: auto;
+    margin: 10px 0 0;
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
     font-size: 1.3rem;
   }
 

@@ -81,6 +81,53 @@ test("homepage keeps the paper surface and large complete avatar framing", () =>
   assert.match(css, /\.hero\[data-detail-visible="true"\] \.hero-copy/);
 });
 
+test("desktop welcome copy stays in a narrow clear column beside the avatar", () => {
+  const desktopCopyBlock = css.match(/@media \(min-width: 721px\)[\s\S]*?\.hero-copy\s*{([\s\S]*?)\n  }/)?.[1] ?? "";
+  assert.match(desktopCopyBlock, /left:\s*clamp\(18px,\s*2\.8vw,\s*40px\)/);
+  assert.match(desktopCopyBlock, /top:\s*clamp\(28px,\s*5vh,\s*48px\)/);
+  assert.match(desktopCopyBlock, /width:\s*min\(27vw,\s*300px\)/);
+  assert.match(desktopCopyBlock, /padding:\s*10px\s+18px\s+18px\s+0/);
+  assert.doesNotMatch(desktopCopyBlock, /background:/);
+  assert.match(css, /\.hero-copy \.hero-welcome[\s\S]*white-space:\s*nowrap/);
+});
+
+test("homepage busts the cached stylesheet after the clear-column fix", () => {
+  assert.match(html, /styles\/portfolio\.css\?v=20260820-unified-page-paper/);
+});
+
+test("resting avatar shifts right while hotspot projection follows the group", () => {
+  assert.match(scene, /DEFAULT_AVATAR_OFFSET_X\s*=\s*0\.86/);
+  assert.match(scene, /avatar\.position\.set\(DEFAULT_AVATAR_OFFSET_X,\s*0,\s*0\)/);
+  assert.match(scene, /new THREE\.Vector3\(DEFAULT_AVATAR_OFFSET_X,\s*0\.2,\s*0\)/);
+  assert.match(scene, /item\.anchor\[0\]\s*\+\s*DEFAULT_AVATAR_OFFSET_X\s*\+\s*DETAIL_CAMERA_SHIFT_X/);
+});
+
+test("desktop Chinese welcome lockup uses vertical editorial typesetting", () => {
+  assert.match(css, /@media \(min-width: 721px\)[\s\S]+\.hero-copy \.hero-welcome[\s\S]*writing-mode:\s*vertical-rl/);
+  assert.match(css, /@media \(min-width: 721px\)[\s\S]+\.hero-copy \.hero-signature[\s\S]*writing-mode:\s*vertical-rl/);
+  assert.match(css, /@media \(max-width: 720px\)[\s\S]+\.hero \.hero-welcome[\s\S]*writing-mode:\s*horizontal-tb/);
+});
+
+test("homepage refreshes the stylesheet for the vertical welcome lockup", () => {
+  assert.match(html, /styles\/portfolio\.css\?v=20260820-unified-page-paper/);
+});
+
+test("homepage uses one paper background without an isolated welcome panel", () => {
+  assert.match(css, /\.hero\s*{[\s\S]*background:\s*var\(--paper\)/);
+  assert.match(css, /\.scene-shell\s*{[\s\S]*background:\s*var\(--paper\)/);
+  assert.doesNotMatch(css, /\.hero-copy\s*{[^}]*background:/);
+  assert.match(scene, /new THREE\.MeshBasicMaterial\(\{\s*color:\s*0xf4f1e8/);
+});
+
+test("full-page sections keep the same paper background as the homepage", () => {
+  const selectedCasesBlock = css.match(/#selected-cases\s*{[^}]*}/)?.[0] ?? "";
+  const alternatingStoryBlock = css.match(/\.story:nth-child\(even\)\s*{[^}]*}/)?.[0] ?? "";
+  assert.match(selectedCasesBlock, /background:\s*var\(--paper\)/);
+  assert.match(alternatingStoryBlock, /background:\s*var\(--paper\)/);
+  assert.doesNotMatch(selectedCasesBlock, /#e8ebe3/);
+  assert.doesNotMatch(alternatingStoryBlock, /#e8ebe3/);
+});
+
 test("DOM content renders before the optional scene import", () => {
   assert.match(main, /from "\.\/hotspot-view\.js"/);
   assert.match(main, /renderHotspots/);
